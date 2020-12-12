@@ -26,7 +26,7 @@ public class Course {
      * @param mCourseSeatsTotal
      * @param mInstructors
      */
-    public Course(String mCourseName, String mCourseCode, int mCourseCredits, String mCourseDescription, String mCourseEnrollmentStatus, String mCourseTerm, String mScheduleDays, String mScheduleEndDate, String mScheduleEndTime, String mScheduleLocation, String mScheduleStartDate, String mScheduleStartTime, String mScheduleTermCount, int mCourseSeatsFilled, int mCourseSeatsTotal, String[] mInstructors) {
+    public Coursesdsss(String mCourseName, String mCourseCode, int mCourseCredits, String mCourseDescription, String mCourseEnrollmentStatus, String mCourseTerm, String mScheduleDays, String mScheduleEndDate, String mScheduleEndTime, String mScheduleLocation, String mScheduleStartDate, String mScheduleStartTime, String mScheduleTermCount, int mCourseSeatsFilled, int mCourseSeatsTotal, String[] mInstructors) {
         this.mCourseName = mCourseName;
         this.mCourseCode = mCourseCode;
         this.mCourseCredits = mCourseCredits;
