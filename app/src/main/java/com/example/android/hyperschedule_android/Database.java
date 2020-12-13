@@ -8,7 +8,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,18 +40,12 @@ public class Database {
         mQueue.add(request);
     }
 
-    public static Course getCourse(String courseKey) {
-        try {
-            JSONObject course = courses.getJSONObject(courseKey);
-            String courseName = course.getString("courseName");
-            String courseCode = course.getString("courseCode");
-            int courseCredits = course.getInt("courseCredits");
-            String courseEnrollmentStatus = course.getString("courseEnrollmentStatus");
-            JSONArray courseInstructors = course.getJSONArray("courseInstructors");
-            courseInstructors.t
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public static Course getCourse(String courseKey) throws JSONException  {
+
+        JSONObject course = courses.getJSONObject(courseKey);
+        Course c = new Course(course);
+        return c;
+
     }
 
 

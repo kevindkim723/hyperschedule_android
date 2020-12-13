@@ -1,179 +1,126 @@
 package com.example.android.hyperschedule_android;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Course {
-    private String mCourseName, mCourseCode, mCourseDescription, mCourseEnrollmentStatus, mCourseTerm;
-    private String mScheduleDays,mScheduleEndDate, mScheduleEndTime, mScheduleLocation,mScheduleStartDate,mScheduleStartTime,mScheduleTermCount;
-    private int mCourseCredits, mCourseSeatsFilled, mCourseSeatsTotal;
-    private String[] mInstructors;
+    private JSONObject course;
 
-
-    /**
-     *
-     * @param mCourseName
-     * @param mCourseCode
-     * @param mCourseCredits
-     * @param mCourseDescription
-     * @param mCourseEnrollmentStatus
-     * @param mCourseTerm
-     * @param mScheduleDays
-     * @param mScheduleEndDate
-     * @param mScheduleEndTime
-     * @param mScheduleLocation
-     * @param mScheduleStartDate
-     * @param mScheduleStartTime
-     * @param mScheduleTermCount
-     * @param mCourseSeatsFilled
-     * @param mCourseSeatsTotal
-     * @param mInstructors
-     */
-    public Coursesdsss(String mCourseName, String mCourseCode, int mCourseCredits, String mCourseDescription, String mCourseEnrollmentStatus, String mCourseTerm, String mScheduleDays, String mScheduleEndDate, String mScheduleEndTime, String mScheduleLocation, String mScheduleStartDate, String mScheduleStartTime, String mScheduleTermCount, int mCourseSeatsFilled, int mCourseSeatsTotal, String[] mInstructors) {
-        this.mCourseName = mCourseName;
-        this.mCourseCode = mCourseCode;
-        this.mCourseCredits = mCourseCredits;
-        this.mCourseDescription = mCourseDescription;
-        this.mCourseEnrollmentStatus = mCourseEnrollmentStatus;
-        this.mCourseTerm = mCourseTerm;
-        this.mScheduleDays = mScheduleDays;
-        this.mScheduleEndDate = mScheduleEndDate;
-        this.mScheduleEndTime = mScheduleEndTime;
-        this.mScheduleLocation = mScheduleLocation;
-        this.mScheduleStartDate = mScheduleStartDate;
-        this.mScheduleStartTime = mScheduleStartTime;
-        this.mScheduleTermCount = mScheduleTermCount;
-        this.mCourseSeatsFilled = mCourseSeatsFilled;
-        this.mCourseSeatsTotal = mCourseSeatsTotal;
-        this.mInstructors = mInstructors;
+    public Course(JSONObject course) {
+        this.course = course;
     }
-    public void update()
+    public void update(JSONObject course)
     {
-
+        this.course = course;
     }
 
-    public String getmCourseName() {
-        return mCourseName;
+    public String getmCourseName() throws JSONException {
+        return course.getString("courseName");
     }
 
-    public void setmCourseName(String mCourseName) {
-        this.mCourseName = mCourseName;
+
+
+    public String getmCourseCode() throws JSONException {
+        return course.getString("courseCode");
     }
 
-    public String getmCourseCode() {
-        return mCourseCode;
+
+
+    public int getmCourseCredits() throws JSONException {
+        return course.getInt("courseCredits");
     }
 
-    public void setmCourseCode(String mCourseCode) {
-        this.mCourseCode = mCourseCode;
+
+
+    public String getmCourseDescription() throws JSONException {
+        return course.getString("courseDescription");
     }
 
-    public int getmCourseCredits() {
-        return mCourseCredits;
+
+
+    public String getmCourseEnrollmentStatus() throws JSONException {
+        return course.getString("courseEnrollmentStatus");
     }
 
-    public void setmCourseCredits(String mCourseCredits) {
-        this.mCourseCredits = mCourseCredits;
+
+    public String getmCourseTerm() throws JSONException {
+        return course.getString("courseTerm");
     }
 
-    public String getmCourseDescription() {
-        return mCourseDescription;
+
+    public String getmScheduleDays() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleDays");
     }
 
-    public void setmCourseDescription(String mCourseDescription) {
-        this.mCourseDescription = mCourseDescription;
+
+    public String getmScheduleEndDate() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleEndDate");
     }
 
-    public String getmCourseEnrollmentStatus() {
-        return mCourseEnrollmentStatus;
+
+
+    public String getmScheduleEndTime() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleEndTime");
     }
 
-    public void setmCourseEnrollmentStatus(String mCourseEnrollmentStatus) {
-        this.mCourseEnrollmentStatus = mCourseEnrollmentStatus;
+
+
+    public String getmScheduleLocation() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleLocation");
     }
 
-    public String getmCourseTerm() {
-        return mCourseTerm;
+
+    public String getmScheduleStartDate() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleStartDate");
     }
 
-    public void setmCourseTerm(String mCourseTerm) {
-        this.mCourseTerm = mCourseTerm;
+
+
+    public String getmScheduleStartTime() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleStartTime");
     }
 
-    public String getmScheduleDays() {
-        return mScheduleDays;
+
+    public String getmScheduleTermCount() throws JSONException {
+        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleTermCount");
     }
 
-    public void setmScheduleDays(String mScheduleDays) {
-        this.mScheduleDays = mScheduleDays;
+
+
+
+    public int getmCourseSeatsFilled() throws JSONException {
+
+        return course.getInt("courseSeatsFilled");
     }
 
-    public String getmScheduleEndDate() {
-        return mScheduleEndDate;
+
+    public int getmCourseSeatsTotal() throws JSONException {
+        return course.getInt("courseSeatsTotal");
     }
 
-    public void setmScheduleEndDate(String mScheduleEndDate) {
-        this.mScheduleEndDate = mScheduleEndDate;
+
+
+    public String[] getmInstructors() throws JSONException {
+        JSONArray arr = course.getJSONArray("courseInstructors");
+        String[] instructors = new String[arr.length()];
+        for (int i = 0 ; i < arr.length(); i++)
+        {
+            instructors[i] = arr.get(i).toString();
+        }
+        return instructors;
+    }
+    public String[] getmCourseSortKey() throws JSONException{
+        String[] sortkey = new String[5];
+        JSONArray arr = course.getJSONArray("courseSortKey");
+        for (int i = 0 ; i < 5 ; i++)
+        {
+            sortkey[i] = arr.get(i).toString();
+        }
+        return sortkey;
     }
 
-    public String getmScheduleEndTime() {
-        return mScheduleEndTime;
-    }
 
-    public void setmScheduleEndTime(String mScheduleEndTime) {
-        this.mScheduleEndTime = mScheduleEndTime;
-    }
-
-    public String getmScheduleLocation() {
-        return mScheduleLocation;
-    }
-
-    public void setmScheduleLocation(String mScheduleLocation) {
-        this.mScheduleLocation = mScheduleLocation;
-    }
-
-    public String getmScheduleStartDate() {
-        return mScheduleStartDate;
-    }
-
-    public void setmScheduleStartDate(String mScheduleStartDate) {
-        this.mScheduleStartDate = mScheduleStartDate;
-    }
-
-    public String getmScheduleStartTime() {
-        return mScheduleStartTime;
-    }
-
-    public void setmScheduleStartTime(String mScheduleStartTime) {
-        this.mScheduleStartTime = mScheduleStartTime;
-    }
-
-    public String getmScheduleTermCount() {
-        return mScheduleTermCount;
-    }
-
-    public void setmScheduleTermCount(String mScheduleTermCount) {
-        this.mScheduleTermCount = mScheduleTermCount;
-    }
-
-    public int getmCourseSeatsFilled() {
-        return mCourseSeatsFilled;
-    }
-
-    public void setmCourseSeatsFilled(int mCourseSeatsFilled) {
-        this.mCourseSeatsFilled = mCourseSeatsFilled;
-    }
-
-    public int getmCourseSeatsTotal() {
-        return mCourseSeatsTotal;
-    }
-
-    public void setmCourseSeatsTotal(int mCourseSeatsTotal) {
-        this.mCourseSeatsTotal = mCourseSeatsTotal;
-    }
-
-    public String[] getmInstructors() {
-        return mInstructors;
-    }
-
-    public void setmInstructors(String[] mInstructors) {
-        this.mInstructors = mInstructors;
-    }
 }
