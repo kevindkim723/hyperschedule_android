@@ -11,6 +11,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Database {
     static final String URL = "https://hyperschedule.herokuapp.com/api/v3/courses?school=hmc";
     static JSONObject courses;
@@ -45,6 +47,10 @@ public class Database {
         JSONObject course = courses.getJSONObject(courseKey);
         Course c = new Course(course);
         return c;
+
+    }
+    public static ArrayList<Course> getAllCourses() throws JSONException
+    {
 
     }
 

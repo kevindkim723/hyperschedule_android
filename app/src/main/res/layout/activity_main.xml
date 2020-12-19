@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:background="@android:color/darker_gray"
-        android:padding="4dp"/>
+        android:id="@+id/Fragment_Container"
+        />
 </RelativeLayout>
