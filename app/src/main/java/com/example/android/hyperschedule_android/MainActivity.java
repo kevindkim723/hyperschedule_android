@@ -4,19 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.android.hyperschedule_android.Fragments.list_fragment;
+import com.example.android.hyperschedule_android.Fragments.main_fragment;
+
 
 public class MainActivity extends AppCompatActivity {
-    private list_fragment mListFragment;
+    private main_fragment mMain_Fragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mListFragment = new list_fragment();
+        mMain_Fragment= new main_fragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.Fragment_Container, mListFragment)
+                .replace(R.id.Fragment_Container, mMain_Fragment)
                 .commit();
     }
 }

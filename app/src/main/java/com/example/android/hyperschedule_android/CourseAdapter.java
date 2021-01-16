@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
     private ArrayList<Course> mCourseList;
+    public CourseAdapter(ArrayList<Course> mCourseList)
+    {
+        this.mCourseList = mCourseList;
+    }
     @NonNull
     @Override
     public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
