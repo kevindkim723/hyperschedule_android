@@ -1,8 +1,10 @@
 package com.example.android.hyperschedule_android.Fragments;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +27,7 @@ import java.util.Iterator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +48,7 @@ public class main_fragment extends Fragment {
 
         View v = inflater.inflate(R.layout.main_frag, container, false);
         System.out.println("THIS SHOULD BE DONE FIRST");
+        setHasOptionsMenu(true);
         /*
         code for toolbar
          */
@@ -58,8 +62,8 @@ public class main_fragment extends Fragment {
         setUpRecyclerView(view);
 
     }
-    private void setUpRecyclerView(View v)
-    {
+
+    private void setUpRecyclerView(View v) {
         System.out.println("database has been parsedA");
         mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -68,11 +72,9 @@ public class main_fragment extends Fragment {
         JSONParse();
 
 
-
-
     }
-    private void JSONParse()
-    {
+
+    private void JSONParse() {
         RequestQueue mQueue = Volley.newRequestQueue(getActivity());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
@@ -81,16 +83,13 @@ public class main_fragment extends Fragment {
 
                     JSONObject data = response.getJSONObject("data");
                     System.out.println("I AM FINISHED ----------------------------------------------------------------------------00-0-0-0-0");
-                    JSONObject  courses = data.getJSONObject("courses");
+                    JSONObject courses = data.getJSONObject("courses");
                     ArrayList<Course> mCourseList = getAllCourses(courses);
-                    if (mCourseAdapter == null)
-                    {
+                    if (mCourseAdapter == null) {
                         mCourseAdapter = new CourseAdapter(mCourseList);
                         mRecyclerView.setAdapter(mCourseAdapter);
-                    }
-                    else
-                    {
-                       mCourseAdapter.notifyDataSetChanged();
+                    } else {
+                        mCourseAdapter.notifyDataSetChanged();
                     }
 
 
@@ -118,6 +117,7 @@ public class main_fragment extends Fragment {
         });
         mQueue.add(request);
     }
+
     public ArrayList<Course> getAllCourses(JSONObject courses) {
         ArrayList<Course> arr = new ArrayList<>();
         Iterator<String> itr = courses.keys();
@@ -134,4 +134,25 @@ public class main_fragment extends Fragment {
 
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mCourseAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+    }
 }
