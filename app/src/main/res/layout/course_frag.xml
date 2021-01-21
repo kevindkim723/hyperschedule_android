@@ -6,9 +6,12 @@
 
 
     <TextView
-        android:gravity="center_horizontal"
+
+        android:gravity="center"
         android:id="@+id/course_title"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
+
         android:layout_width="match_parent"
         android:text="hellooo"
         />
@@ -21,9 +24,10 @@
         android:background="#c0c0c0" />
     <TextView
 
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/course_loc"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
         android:layout_width="match_parent"
         android:text="hellooo"
         />
@@ -34,9 +38,10 @@
         android:layout_height="2dp"
         android:background="#c0c0c0"/>
     <TextView
-        android:gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
         android:id="@+id/course_instructors"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:text="hellooo"
         />
@@ -46,9 +51,10 @@
         android:layout_height="2dp"
         android:background="#c0c0c0" />
     <TextView
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/course_credits"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
         android:layout_width="match_parent"
         android:text="hellooo"
         />
@@ -57,20 +63,23 @@
         android:layout_height="2dp"
         android:background="#c0c0c0" />
     <TextView
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/course_description"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="5"
         android:layout_width="match_parent"
         android:text="hellooo"
         />
     <View
+        android:id="@+id/dline"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#c0c0c0"/>
     <TextView
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/course_seats"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight=".5"
         android:layout_width="match_parent"
         android:text="hellooo"
         />

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class Course {
     private JSONObject course;
-    private String mCourseName, mCourseCode, mCourseDescription;
+    private String mCourseName, mCourseCode, mCourseDescription,mCourseType, mCourseDays, mCourseLocation, mCourseTime, mCourseStatus, mCourseSeats;
     private int mCourseCredits;
     private String[] mInstructors;
 
@@ -30,8 +30,47 @@ public class Course {
         mCourseCredits = getmCourseCredits();
         mCourseDescription = getmCourseDescription();
         mInstructors = getmInstructors();
+        mCourseType = getmCourseTerm();
+        mCourseDays = getmScheduleDays();
+        mCourseLocation = getmScheduleLocation();
+        mCourseTime = getmScheduleStartTime() + " - " + getmScheduleEndTime();
+        mCourseStatus = getmCourseEnrollmentStatus();
+        mCourseSeats = getmCourseSeatsFilled() + "/" + getmCourseSeatsTotal();
+
+
 
     }
+    public String firstLine()
+    {
+        return mCourseCode + " " +mCourseName;
+    }
+    public String secondLine()
+    {
+        return mCourseDays + " " + mCourseTime + " at " + mCourseLocation;
+    }
+    public String thirdLine(){
+        StringBuilder sb = new StringBuilder();
+       for (String x : mInstructors)
+       {
+           sb.append(x + " ");
+       }
+       return sb.toString();
+    }
+    public String fourthLine()
+    {
+        return mCourseType + ", " + mCourseCredits + " credits";
+    }
+    public String fifthLine()
+
+    {
+
+        return mCourseDescription;
+    }
+    public String sixthLine()
+    {
+        return mCourseStatus + ", " + mCourseSeats + " filled";
+    }
+
 
     public String getmCourseName() throws JSONException {
         return course.getString("courseName");
@@ -64,37 +103,38 @@ public class Course {
 
 
     public String getmScheduleDays() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleDays");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleDays");
     }
 
 
     public String getmScheduleEndDate() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleEndDate");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleEndDate");
     }
 
 
     public String getmScheduleEndTime() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleEndTime");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleEndTime");
     }
 
 
     public String getmScheduleLocation() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleLocation");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleLocation");
     }
 
 
     public String getmScheduleStartDate() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleStartDate");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleStartDate");
+
     }
 
 
     public String getmScheduleStartTime() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleStartTime");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleStartTime");
     }
 
 
     public String getmScheduleTermCount() throws JSONException {
-        return course.getJSONObject("courseSchedule").getJSONObject("0").getString("scheduleTermCount");
+        return course.getJSONArray("courseSchedule").getJSONObject(0).getString("scheduleTermCount");
     }
 
 

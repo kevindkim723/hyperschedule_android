@@ -29,6 +29,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +51,8 @@ public class main_fragment extends Fragment {
         View v = inflater.inflate(R.layout.main_frag, container, false);
         System.out.println("THIS SHOULD BE DONE FIRST");
         setHasOptionsMenu(true);
+
+        setUpRecyclerView(v);
         /*
         code for toolbar
          */
@@ -56,10 +60,16 @@ public class main_fragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mRecyclerView.setAdapter(mCourseAdapter);
+        System.out.println("resumed");
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpRecyclerView(view);
 
     }
 
@@ -67,9 +77,10 @@ public class main_fragment extends Fragment {
         System.out.println("database has been parsedA");
         mRecyclerView = v.findViewById(R.id.mRecyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         JSONParse();
+
 
 
     }
@@ -82,13 +93,37 @@ public class main_fragment extends Fragment {
                 try {
 
                     JSONObject data = response.getJSONObject("data");
-                    System.out.println("I AM FINISHED ----------------------------------------------------------------------------00-0-0-0-0");
+                    System.out.println("JSON IS PARSING");
                     JSONObject courses = data.getJSONObject("courses");
-                    ArrayList<Course> mCourseList = getAllCourses(courses);
+                    final ArrayList<Course> mCourseList = getAllCourses(courses);
                     if (mCourseAdapter == null) {
+                        System.out.println("Initializing Adapter");
                         mCourseAdapter = new CourseAdapter(mCourseList);
+
                         mRecyclerView.setAdapter(mCourseAdapter);
+                        mCourseAdapter.setOnItemClickListener(new CourseAdapter.onItemClickListener() {
+                            @Override
+                            public void onItemClick(int position, boolean selected) {
+                                course_fragment cf = new course_fragment();
+                                FragmentManager manager = getFragmentManager();
+                                FragmentTransaction transaction = manager.beginTransaction();
+                                Bundle bundle = new Bundle();
+                                Course c = mCourseList.get(position);
+                                bundle.putString("1", c.firstLine() );
+                                bundle.putString("2", c.secondLine() );
+                                bundle.putString("3", c.thirdLine() );
+                                bundle.putString("4", c.fourthLine() );
+                                bundle.putString("5", c.fifthLine() );
+                                bundle.putString("6", c.sixthLine() );
+                                cf.setArguments(bundle);
+
+                                transaction.replace(R.id.Fragment_Container,cf,"cf");
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            }
+                        });
                     } else {
+                        System.out.println("NOT NULL");
                         mCourseAdapter.notifyDataSetChanged();
                     }
 
